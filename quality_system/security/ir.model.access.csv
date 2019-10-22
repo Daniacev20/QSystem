@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_order_productions_quality_user,production.order.user.quality,quality_system.model_production_order,quality_system.group_quality_user,1,0,0,0
+access_product_product_quality_user,product.product.user.quality,product.model_product_product,quality_system.group_quality_user,1,0,0,0
+access_product_lot_quality_user,production.lot.user.quality,order_productions.model_production_lot,quality_system.group_quality_user,1,0,0,0
+access_quality_user,dimensional.test.user,quality_system.model_dimensional_test,quality_system.group_quality_user,1,1,1,0
+access_quality_line_user,dimensional.test.line.user,quality_system.model_dimensional_test_line,quality_system.group_quality_user,1,1,1,0
+access_type_test_user,test.type.user,quality_system.model_test_type,quality_system.group_quality_user,1,0,0,0
+access_process_test_user,process.test.user,quality_system.model_process_test,quality_system.group_quality_user,1,0,0,0
+access_type_test_manager,test.type.manager,quality_system.model_test_type,quality_system.group_quality_manager,1,1,1,1
+access_process_test_manager,process.test.manager,quality_system.model_process_test,quality_system.group_quality_manager,1,1,1,1

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_dimensional_test">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2>Conforming Report</h2>
+                            <p><h3><span t-field="o.name"/></h3></p>
+
+
+
+                            <table class="table table-condensed">
+                                <tr>
+                                    <td>Orden de Produccion</td>
+                                    <td><span t-field="o.production_id"/></td>
+                                    <td>Linea de Produccion</td>
+                                    <td><span t-field="o.line_production"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Numero de Lote</td>
+                                    <td><span t-field="o.lot_id"/></td>
+                                    <td>Fecha Efectiva</td>
+                                    <td><span t-field="o.date"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Codigo SAP</td>
+                                    <td><span t-field="o.sap_code"/></td>
+                                </tr>
+                            </table>
+
+                            <br/><br/><br/>
+                            <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo de Prueba</th>
+                                            <th >Proceso</th>
+                                            <th >No. Herramienta</th>
+                                            <th >Fecha de Expiracion</th>
+                                            <th >Tolerancia Min.</th>
+                                            <th >Tolerancia MMax.</th>
+                                            <th >Cant. Pruebas</th>
+                                            <th >Hora de Inicio</th>
+                                            <th >Tanda</th>
+                                            <th >Hecho por</th>
+                                        </tr>
+                                   </thead>
+                                   <tbody >
+
+                                       <t t-foreach="o.line_ids" t-as="line">
+                                            <tr>
+                                                <td><span t-field="line.type_id"/></td>
+                                                <td><span t-field="line.process_id"/></td>
+                                                <td><span t-field="line.no_tool"/></td>
+                                                <td><span t-field="line.die_date"/></td>
+                                                <td><span t-field="line.min_tolerance"/></td>
+                                                <td><span t-field="line.max_tolerance"/></td>
+                                                <td><span t-field="line.no_test"/></td>
+                                                <td><span t-field="line.time_start"/></td>
+                                                <td><span t-field="line.shift"/></td>
+                                                <td><span t-field="line.create_uid"/></td>
+                                            </tr>
+                                        </t>
+
+                                    </tbody>
+                                </table>
+
+                            <br/><br/>
+
+                            <table>
+                                <tr>
+                                    <td>Estado de Conformidad</td>
+                                    <td><span t-field="o.agreement"/></td>
+                                    <td style="width:50%;"></td>
+                                    <td>Hecho por</td>
+                                    <td><span t-field="o.create_uid"/></td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

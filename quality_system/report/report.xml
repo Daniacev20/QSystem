@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            id="dimensional_tests_report"
+            model="dimensional.test"
+            string="Dimensional/Visual Test"
+            report_type="qweb-pdf"
+            name="quality_system.report_dimensional_test"
+            file="quality_system.report_dimensional_test"
+            attachment_use="True"
+            attachment="('Test-'+(object.name or '').replace('/','')+'.pdf')"
+        />
+
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="seq_production_order" model="ir.sequence">
+            <field name="name">Production Orders</field>
+            <field name="code">production.order</field>
+            <field name="prefix">%(y)s-%(month)s-%(day)s-</field>
+            <field name="padding">5</field>
+        </record>
+
+    </data>
+</odoo>

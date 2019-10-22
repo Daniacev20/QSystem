@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_order_productions_user,production.order.user,quality_system.model_production_order,order_productions.group_production_user,1,1,1,0
+access_product_product_user,product.product.user,product.model_product_product,order_productions.group_production_user,1,0,0,0
+access_product_lot_user,production.lot.user,order_productions.model_production_lot,order_productions.group_production_user,1,0,0,0
+access_order_productions_manager,production.order.manager,quality_system.model_production_order,order_productions.group_production_manager,1,1,1,0
+access_product_product_manager,product.product.manager,product.model_product_product,order_productions.group_production_manager,1,1,1,0
+access_product_lot_manager,production.lot.manager,order_productions.model_production_lot,order_productions.group_production_manager,1,1,1,0

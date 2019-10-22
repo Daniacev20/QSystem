@@ -1,0 +1,201 @@
+<odoo>
+  <data>
+
+    <record id="dimensional_test_form" model="ir.ui.view">
+        <field name="name">dimensional_test_form</field>
+        <field name="model">dimensional.test</field>
+        <field name="arch" type="xml">
+            <form string="Dimensional/Visual Test">
+              <header>
+                  <button name="open_this" string="Process" class="oe_highlight" states="draft" type="object"/>
+                  <button name="close_this" string="Close" class="oe_highlight" states="open" type="object"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,open,close" />
+              </header>
+                <sheet>
+                  <h1><field name="name" readonly="1"/></h1>
+                    <group class="group-top">
+
+                      <group class="group-left">
+                        <field name="production_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        <field name="lot_id" readonly="1"/>
+                        <field name="sap_code" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                      </group>
+
+                      <group class="group_right">
+                        <field name="line_production" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        <field name="date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        <field name="agreement" widget="radio" attrs="{'readonly': [('state', '!=', 'open')]}"/>
+                      </group>
+
+                    </group>
+                  <notebook>
+                      <page string="Tests">
+                              <field name="line_ids" attrs="{'readonly': [('state', '!=', 'open')]}">
+                                <tree editable="top">
+                                  <field name="type_id"/>
+                                  <field name="process_id"/>
+                                  <field name="no_tool"/>
+                                  <field name="die_date"/>
+                                  <field name="min_tolerance" readonly="1"/>
+                                  <field name="max_tolerance" readonly="1"/>
+                                  <field name="no_test"/>
+                                  <field name="time_start"/>
+                                  <field name="shift"/>
+                                  <field name="create_uid" readonly="1"/>
+                                </tree>
+                              </field>
+                      </page>
+
+                      <page string="Other information">
+                          <group>
+                              <field name="create_uid" readonly="1"/>
+                              <field name="create_date" readonly="1"/>
+                              <field name="note"/>
+                          </group>
+                      </page>
+
+                      <page string="Non-Agreement" attrs="{'invisible': [('agreement', '!=', 'no-agreed'), ]}">
+                          <group>
+                              <field name="detected_by" widget="radio" attrs="{'readonly': [('state', '!=', 'open')]}"/>
+                              <field name="responsable_id" readonly="1"/>
+                              <field name="date_agreement" attrs="{'readonly': [('state', '!=', 'open')]}"/>
+                          </group>
+                          <group>
+                              <field name="description_agreement" attrs="{'readonly': [('state', '!=', 'open')]}"/>
+                              <field name="shift" attrs="{'readonly': [('state', '!=', 'open')]}"/>
+                              <field name="impact" attrs="{'readonly': [('state', '!=', 'open')]}"/>
+                          </group>
+                      </page>
+
+                  </notebook>
+                </sheet>
+
+              <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers"/>
+                  <field name="message_ids" widget="mail_thread"/>
+              </div>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="dimensional_test_tree" model="ir.ui.view">
+        <field name="name">dimensional_test_tree</field>
+        <field name="model">dimensional.test</field>
+        <field name="arch" type="xml">
+            <tree string="Dimensional/Visual Test">
+                <field name="name"/>
+                <field name="lot_id"/>
+                <field name="production_id"/>
+                <field name="create_uid"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="dimensional_test_action" model="ir.actions.act_window">
+        <field name="name">Dimensional/Visual Test</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">dimensional.test</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+
+    <record id="test_type_form" model="ir.ui.view">
+        <field name="name">test_type_form</field>
+        <field name="model">test.type</field>
+        <field name="arch" type="xml">
+            <form string="Types of Test">
+                <sheet>
+                    <group class="group-top">
+                      <group class="group-left">
+                        <field name="name"/>
+                        <field name="min_tolerance"/>
+                        <field name="max_tolerance"/>
+                      </group>
+
+                      <group class="group_right">
+                        <field name="note"/>
+                      </group>
+
+                    </group>
+
+                    <field name="process_ids">
+                        <tree editable="top">
+                          <field name="name"/>
+                          <field name="note"/>
+                        </tree>
+                    </field>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="test_type_action" model="ir.actions.act_window">
+        <field name="name">Type of Test</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">test.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="quality_system_categ" name="Quality Control" parent="order_productions.qsystem_root" sequence="5"/>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="dimensional_test_action_categ" name="Dimensional/Visual Test" parent="quality_system_categ"
+              action="dimensional_test_action" sequence="0" groups="quality_system.group_quality_manager,quality_system.group_quality_user"/>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="test_type_action_categ" name="Type of Test" parent="quality_system_categ"
+              action="test_type_action" sequence="5" groups="quality_system.group_quality_manager"/>
+
+      <record model="ir.actions.act_window" id="dimensional_visual_test_default_list">
+        <field name="name">Dimensional Visual Test</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">dimensional.test</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('production_id','=',active_id)]</field>
+        <field name="context">{'default_production_id':active_id}</field>
+    </record>
+
+      <!-- Inherit Form View to Modify it -->
+      <record id="production_order_form_qsystem_inherit_quality_system" model="ir.ui.view">
+          <field name="name">production_order_form_qsystem_inherit_quality_system</field>
+          <field name="model">production.order</field>
+          <field name="inherit_id" ref="order_productions.production_order_form_qsystem"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//field[@name='name']" position="before">
+                  <!-- Add your fields or attributes here -->
+                  <field name="dimensional_test_id" invisible="1"/>
+
+
+                  <div class="oe_button_box" name="button_box" attrs="{'invisible': [('dimensional_test_id', '=', False)]}">
+                        <!-- Add your fields or attributes here -->
+                    <button name="%(dimensional_visual_test_default_list)d" type="action" class="oe_stat_button" icon="fa-list-alt">
+                        <span name="Dimensional/Visual Test" widget="statinfo" string="Dimensional/Visual Test">Dimensional/Visual Test</span>
+                    </button>
+                    </div>
+              </xpath>
+
+          </field>
+      </record>
+
+  </data>
+</odoo>

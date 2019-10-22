@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="production_group">
+          <field name="name">Production</field>
+          <field name="description">User access level for this module</field>
+          <field name="sequence">3</field>
+        </record>
+
+       <record id="group_production_user" model="res.groups">
+         <field name="name">Production User</field>
+         <field name="category_id" ref="order_productions.production_group"/>
+        </record>
+
+       <record id="group_production_manager" model="res.groups">
+         <field name="name">Production Manager</field>
+         <field name="users" eval="[(4, ref('base.user_root'))]"/>
+         <field name="category_id" ref="order_productions.production_group"/>
+        </record>
+
+    </data>
+</odoo>

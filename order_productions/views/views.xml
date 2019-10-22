@@ -1,0 +1,142 @@
+<odoo>
+  <data>
+
+
+    <record id="production_order_form_qsystem" model="ir.ui.view">
+        <field name="name">production_order_form_qsystem</field>
+        <field name="model">production.order</field>
+        <field name="arch" type="xml">
+            <form string="Production Order">
+                <header>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,open,close" />
+                </header>
+                <sheet>
+                    <h1><field name="name" readonly="1"/></h1>
+                    <group class="group-top">
+                      <group class="group-left">
+
+                        <field name="product_id"/>
+                        <field name="lot_id"/>
+                        <field name="qty"/>
+                        <field name="description"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="create_uid" readonly="1"/>
+
+                      </group>
+
+                    </group>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="production_order_tree_qsystem" model="ir.ui.view">
+        <field name="name">production_order_tree_qsystem</field>
+        <field name="model">production.order</field>
+        <field name="arch" type="xml">
+            <tree string="Production Orders">
+                <field name="name"/>
+                <field name="lot_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="production_order_action_qsystem" model="ir.actions.act_window">
+        <field name="name">Production Order</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">production.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+    <record id="production_lot_form_qsystem" model="ir.ui.view">
+        <field name="name">production_lot_form_qsystem</field>
+        <field name="model">production.lot</field>
+        <field name="arch" type="xml">
+            <form string="Lot #">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="create_uid" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="production_lot_tree_qsystem" model="ir.ui.view">
+        <field name="name">production_lot_tree_qsystem</field>
+        <field name="model">production.lot</field>
+        <field name="arch" type="xml">
+            <tree string="Lots">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="production_lot_action_qsystem" model="ir.actions.act_window">
+        <field name="name">Production Lot</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">production.lot</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+    <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+    <menuitem id="qsystem_root" name="Production" sequence="5"/>
+
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="production_order_qsystem_categ" name="Production" parent="qsystem_root" sequence="0"/>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="production_order_action_qsystem_categ" name="Production Order"
+              parent="production_order_qsystem_categ"
+              action="production_order_action_qsystem" sequence="0"
+    groups="order_productions.group_production_manager,order_productions.group_production_user"/>
+
+    <menuitem id="production_lot_action_qsystem_categ" name="Production Lot"
+              parent="production_order_qsystem_categ" action="production_lot_action_qsystem"
+              sequence="5" groups="order_productions.group_production_manager"/>
+
+      <record id="product_qsystem_action" model="ir.actions.act_window">
+          <field name="name">Product</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">product.product</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              <!-- Add Text Here -->
+            </p><p>
+              <!-- More details about what a user can do with this object will be OK -->
+            </p>
+          </field>
+      </record>
+
+      <menuitem id="product_qsystem_action_categ" name="Product"
+              parent="production_order_qsystem_categ" action="product_qsystem_action"
+                sequence="6" groups="order_productions.group_production_manager"/>
+
+  </data>
+</odoo>
